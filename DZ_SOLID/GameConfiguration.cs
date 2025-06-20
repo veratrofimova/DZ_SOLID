@@ -11,12 +11,6 @@ namespace DZ_SOLID
             _userLevel = userLevel;
         }
 
-        public int GetRandomValue(int rangeStart, int rangeEnd)
-        {                
-            Random random = new Random();
-            return random.Next(rangeStart, rangeEnd);            
-        }
-
         public Settings GetConfiguration()
         {
             var сonfiguration = _userLevel.GetUserLevel();

@@ -9,10 +9,5 @@
         /// Задать настройки для игры
         /// </summary>
         Settings GetConfiguration();
-
-        /// <summary>
-        /// Получить значение для игры
-        /// </summary>
-        int GetRandomValue(int rangeStart, int rangeEnd);
     }
 }
