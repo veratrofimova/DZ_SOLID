@@ -5,15 +5,7 @@ namespace DZ_SOLID.Configuration
 {
     public class ProfConfiguration : IUserConfiguration
     {
-        private int _rangeStart;
-        private int _rangeEnd;
-        private int _countAttempts;
-
-        public int RangeStart { get => _rangeStart; set { _rangeStart = value; } }
-        public int RangeEnd { get => _rangeEnd; set { _rangeEnd = value; } }
-        public int CountAttempts { get => _countAttempts; set { _countAttempts = value; } }
-
-        public void GetConfig()
+        public Settings GetConfig()
         {
             string filePath = $"{AppContext.BaseDirectory}\\..\\..\\..\\Config\\ProfConfig.xml";
 
@@ -23,9 +15,11 @@ namespace DZ_SOLID.Configuration
             var xmlData = File.ReadAllText(filePath);
             XDocument doc = XDocument.Parse(xmlData);
 
-            _rangeStart = int.Parse(doc.Element("Config").Element("RangeStart").Value);
-            _rangeEnd = int.Parse(doc.Element("Config").Element("RangeEnd").Value);
-            _countAttempts = int.Parse(doc.Element("Config").Element("CountAttempts").Value);
+            int rangeStart = int.Parse(doc.Element("Config").Element("RangeStart").Value);
+            int rangeEnd = int.Parse(doc.Element("Config").Element("RangeEnd").Value);
+            int countAttempts = int.Parse(doc.Element("Config").Element("CountAttempts").Value);
+
+            return new Settings(rangeStart, rangeEnd, countAttempts);
         }
     }
 }

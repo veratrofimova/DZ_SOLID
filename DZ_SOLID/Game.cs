@@ -5,30 +5,29 @@ namespace DZ_SOLID
 {
     public class Game : IGame, IMessage
     {
-        private readonly IGameConfiguration _configuration;
+        private readonly ISettings _settings;
         private readonly IGameRules _gameRules;
+        private int _randomValue;
 
-        public Game(IGameConfiguration configuration, IGameRules gameRules) 
+        public Game(ISettings settings, IGameRules gameRules) 
         {
-            _configuration = configuration;
+            _settings = settings;
             _gameRules = gameRules;
+            _randomValue = GetRandomValue(_settings.RangeStart, _settings.RangeEnd);
         }
 
         public void Run()
         {
-            _configuration.GetConfiguration();
-            _configuration.GetRandomValue();
-
             SendMessage("");
-            SendMessage($"\r\nНачнем! Отгадайте число от {_configuration.RangeStart} до {_configuration.RangeEnd} за {_configuration.CountAttempts} попытки(ок)");
+            SendMessage($"\r\nНачнем! Отгадайте число от {_settings.RangeStart} до {_settings.RangeEnd} за {_settings.CountAttempts} попытки(ок)");
 
-            int attemptUser = _configuration.CountAttempts;
+            int attemptUser = _settings.CountAttempts;
 
             while (_gameRules.CheckAttemptUser(ref attemptUser))
             {
-                int valueUser = _gameRules.GetGuessValue(_configuration.RangeStart, _configuration.RangeEnd);
+                int valueUser = _gameRules.GetGuessValue(_settings.RangeStart, _settings.RangeEnd);
 
-                var result = _gameRules.CheckValue(_configuration.RandomValue, valueUser);
+                var result = _gameRules.CheckValue(_randomValue, valueUser);
 
                 switch (result)
                 {
@@ -51,6 +50,12 @@ namespace DZ_SOLID
         public void SendMessage(string message)
         {
             Console.WriteLine(message);
+        }
+
+        private int GetRandomValue(int rangeStart, int rangeEnd)
+        {
+            Random random = new Random();
+            return random.Next(rangeStart, rangeEnd);
         }
     }
 }

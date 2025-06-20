@@ -5,19 +5,14 @@
     /// </summary>
     public interface IGameConfiguration
     {
-        int RangeStart { get; }
-        int RangeEnd { get; }
-        int CountAttempts { get; }
-        int RandomValue { get; }
-
         /// <summary>
         /// Задать настройки для игры
         /// </summary>
-        void GetConfiguration();
+        Settings GetConfiguration();
 
         /// <summary>
         /// Получить значение для игры
         /// </summary>
-        void GetRandomValue();
+        int GetRandomValue(int rangeStart, int rangeEnd);
     }
 }

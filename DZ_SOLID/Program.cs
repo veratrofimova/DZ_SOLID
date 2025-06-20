@@ -12,8 +12,10 @@ namespace DZ_SOLID
 
             IUserLevel userLevel = new UserLevel();    
             IGameConfiguration configuration = new GameConfiguration(userLevel);
+            ISettings settings = configuration.GetConfiguration();
             IGameRules gameRules = new GameRules();
-            IGame game = new Game(configuration, gameRules);
+
+            IGame game = new Game(settings, gameRules);
 
             char key;
             do
