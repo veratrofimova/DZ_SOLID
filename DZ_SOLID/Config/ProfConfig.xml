@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+	<RangeStart>0</RangeStart>
+	<RangeEnd>1000</RangeEnd>
+	<CountAttempts>9</CountAttempts>
+</Config>
